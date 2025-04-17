@@ -1,0 +1,348 @@
+{
+  "info": {
+    "_postman_id": "e5f3c2a1-b8d4-4c6e-9f8a-d12e45678901",
+    "name": "Emergency System API",
+    "description": "Collection for testing the Emergency System microservices",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "caller_operator_url",
+      "value": "http://localhost:3001"
+    },
+    {
+      "key": "team_url",
+      "value": "http://localhost:3002"
+    },
+    {
+      "key": "incident_url",
+      "value": "http://localhost:3003"
+    }
+  ],
+  "item": [
+    {
+      "name": "Caller-Operator Service",
+      "item": [
+        {
+          "name": "Callers",
+          "item": [
+            {
+              "name": "Create Caller",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"name\": \"John Doe\",\n    \"phone\": \"+33123456789\"\n}"
+                },
+                "url": {
+                  "raw": "{{caller_operator_url}}/api/callers",
+                  "host": ["{{caller_operator_url}}"],
+                  "path": ["api", "callers"]
+                }
+              }
+            },
+            {
+              "name": "Get All Callers",
+              "request": {
+                "method": "GET",
+                "url": {
+                  "raw": "{{caller_operator_url}}/api/callers",
+                  "host": ["{{caller_operator_url}}"],
+                  "path": ["api", "callers"]
+                }
+              }
+            },
+            {
+              "name": "Get Caller by ID",
+              "request": {
+                "method": "GET",
+                "url": {
+                  "raw": "{{caller_operator_url}}/api/callers/:id",
+                  "host": ["{{caller_operator_url}}"],
+                  "path": ["api", "callers", ":id"],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "caller_id_here"
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "Operators",
+          "item": [
+            {
+              "name": "Create Operator",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"name\": \"Jane Smith\"\n}"
+                },
+                "url": {
+                  "raw": "{{caller_operator_url}}/api/operators",
+                  "host": ["{{caller_operator_url}}"],
+                  "path": ["api", "operators"]
+                }
+              }
+            },
+            {
+              "name": "Get All Operators",
+              "request": {
+                "method": "GET",
+                "url": {
+                  "raw": "{{caller_operator_url}}/api/operators",
+                  "host": ["{{caller_operator_url}}"],
+                  "path": ["api", "operators"]
+                }
+              }
+            },
+            {
+              "name": "Get Operator by ID",
+              "request": {
+                "method": "GET",
+                "url": {
+                  "raw": "{{caller_operator_url}}/api/operators/:id",
+                  "host": ["{{caller_operator_url}}"],
+                  "path": ["api", "operators", ":id"],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "operator_id_here"
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Team Service",
+      "item": [
+        {
+          "name": "Create Team",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"type\": \"medical\",\n    \"availability\": true\n}"
+            },
+            "url": {
+              "raw": "{{team_url}}/api/teams",
+              "host": ["{{team_url}}"],
+              "path": ["api", "teams"]
+            }
+          }
+        },
+        {
+          "name": "Get All Teams",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{team_url}}/api/teams",
+              "host": ["{{team_url}}"],
+              "path": ["api", "teams"]
+            }
+          }
+        },
+        {
+          "name": "Get Available Team",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{team_url}}/api/teams/available",
+              "host": ["{{team_url}}"],
+              "path": ["api", "teams", "available"]
+            }
+          }
+        },
+        {
+          "name": "Get Team by ID",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{team_url}}/api/teams/:id",
+              "host": ["{{team_url}}"],
+              "path": ["api", "teams", ":id"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "team_id_here"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Update Team Availability",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"availability\": false\n}"
+            },
+            "url": {
+              "raw": "{{team_url}}/api/teams/:id/availability",
+              "host": ["{{team_url}}"],
+              "path": ["api", "teams", ":id", "availability"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "team_id_here"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Incident Service",
+      "item": [
+        {
+          "name": "Report Incident",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"localisation\": \"123 Emergency Street, Paris\",\n    \"description\": \"Medical emergency situation\",\n    \"callerId\": \"caller_id_here\",\n    \"operatorId\": \"operator_id_here\"\n}"
+            },
+            "url": {
+              "raw": "{{incident_url}}/api/incidents",
+              "host": ["{{incident_url}}"],
+              "path": ["api", "incidents"]
+            }
+          }
+        },
+        {
+          "name": "Get All Incidents",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{incident_url}}/api/incidents",
+              "host": ["{{incident_url}}"],
+              "path": ["api", "incidents"]
+            }
+          }
+        },
+        {
+          "name": "Get Incident by ID",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{incident_url}}/api/incidents/:id",
+              "host": ["{{incident_url}}"],
+              "path": ["api", "incidents", ":id"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "incident_id_here"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Update Incident Status",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"status\": \"in_progress\"\n}"
+            },
+            "url": {
+              "raw": "{{incident_url}}/api/incidents/:id/status",
+              "host": ["{{incident_url}}"],
+              "path": ["api", "incidents", ":id", "status"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "incident_id_here"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Health Checks",
+      "item": [
+        {
+          "name": "Caller-Operator Health",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{caller_operator_url}}/health",
+              "host": ["{{caller_operator_url}}"],
+              "path": ["health"]
+            }
+          }
+        },
+        {
+          "name": "Team Health",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{team_url}}/health",
+              "host": ["{{team_url}}"],
+              "path": ["health"]
+            }
+          }
+        },
+        {
+          "name": "Incident Health",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{incident_url}}/health",
+              "host": ["{{incident_url}}"],
+              "path": ["health"]
+            }
+          }
+        }
+      ]
+    }
+  ]
+} 
